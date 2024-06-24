@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}User Detail Page{% endblock %}
+
+{% block content %}
+<div class="container mt-2 ml-1">
+    <div class="row">
+        {% if user.image_url %}
+        <div class="col-md-auto mr-1">
+            <img src="{{ user.image_url }}" alt="Image of {{ user.first_name }} {{ user.last_name }}"
+                class="img-thumbnail" style="max-width: 100px;">
+        </div>
+        {% endif %}
+        <div class="col">
+            <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+            <a href="/users/{{user.id}}/edit"><button class="btn btn-primary btn-sm">Edit</button></a>
+            <form action="/users/{{ user.id }}/delete" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm ml-1">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
