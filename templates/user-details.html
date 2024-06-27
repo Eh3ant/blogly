@@ -17,6 +17,15 @@
             <form action="/users/{{ user.id }}/delete" method="post" style="display:inline;">
                 <button type="submit" class="btn btn-danger btn-sm ml-1">Delete</button>
             </form>
+            <div class="ml-1 mt-3">
+                <h2>Posts</h2>
+                <ul>
+                    {% for post in posts %}
+                    <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <a href="/users/{{ user.id }}/posts/new" class="btn btn-success ml-1">Add Post</a>
+            </div>
         </div>
     </div>
 </div>
