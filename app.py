@@ -36,7 +36,7 @@ def add_new_user():
         db.session.add(new_user)
         db.session.commit()
         
-
+        flash('User successfully created!', 'success')
         return redirect('/users')
     return render_template('add-user.html')
 
@@ -73,6 +73,8 @@ def delete_user(user_id):
     found_user = User.query.get_or_404(user_id)
     db.session.delete(found_user)
     db.session.commit()
+
+    flash('User and their posts have been successfully deleted!', 'success')
     return redirect('/users')
 
 @app.route('/posts/<int:post_id>')
@@ -92,7 +94,8 @@ def add_post(user_id):
 
         db.session.add(new_post)
         db.session.commit()
-
+        
+        flash('Post successfully created!', 'success')
         return redirect(f'/users/{user_id}')
     return render_template('add-post.html', user=user)
 
