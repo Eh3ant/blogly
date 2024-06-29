@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-3 ">
+    <h1 class="text-center">Blogly Recent Posts</h1>
+    <ul class="list-group">
+        {% for post in posts %}
+        <li class="list-group-item">
+            <h2>{{ post.title|title }}</h2>
+            <p>{{post.content}}</p>
+            <small><i>by {{ post.user.first_name|capitalize }} {{ post.user.last_name|capitalize }} on {{
+                    post.created_at.strftime('%B %-d,
+                    %Y,
+                    %-I:%M %p') }}</i></small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request,flash
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Post
 
@@ -13,9 +13,11 @@ debug = DebugToolbarExtension(app)
 
 connect_db(app)
 
+
 @app.route('/')
 def home_page():
-    return redirect('/users')
+    recent_posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
+    return render_template('home.html', posts=recent_posts)
 
 @app.route('/users')
 def list_users():
@@ -33,6 +35,7 @@ def add_new_user():
 
         db.session.add(new_user)
         db.session.commit()
+        
 
         return redirect('/users')
     return render_template('add-user.html')
@@ -111,7 +114,9 @@ def delete_post(post_id):
     db.session.commit()
     return redirect(f'/users/{post.user_id}')
 
-
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
    
 
 
