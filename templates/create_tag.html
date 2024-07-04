@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Tag {% endblock %}
+
+{% block content %}
+<div class="container mt-3 ml-1">
+    <h1 class="ml-3">Create a tag</h1>
+    <form action="/tag/new" method="post" class="mt-2">
+        <div class="form-group ml-3">
+            <label for="tag">Name</label>
+            <input type="text" class="form-control col-md-6" id="tag" name="tag" placeholder="Enter a name for the tag"
+                required>
+        </div>
+        <a href="/tags" class="btn btn-outline-primary ml-3">Cancel</a>
+        <button type="submit" class="btn btn-success ml-2 ">Add</button>
+    </form>
+</div>
+{% endblock %}
